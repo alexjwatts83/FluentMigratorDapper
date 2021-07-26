@@ -1,6 +1,8 @@
+using FluentMigratorDapper.Application.Interfaces;
+using FluentMigratorDapper.Infrastructure.Persistence;
+using FluentMigratorDapper.Infrastructure.Persistence.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,12 +12,13 @@ namespace FluentMigratorDapper.WebUI
 {
     public class Startup
     {
+        private readonly IConfiguration _config;
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _config = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        //public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -26,6 +29,12 @@ namespace FluentMigratorDapper.WebUI
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddPersistenceServices(_config);
+
+            services.Configure<ConnectionStringSettings>(_config.GetSection(ConnectionStringSettings.Section));
+
+            services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
