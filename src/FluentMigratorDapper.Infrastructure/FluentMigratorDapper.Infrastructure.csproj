@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Persistence\Migrations\" />
+    <PackageReference Include="FluentMigrator" Version="3.2.17" />
   </ItemGroup>
 
 </Project>
