@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FluentMigratorDapper.Core
+namespace FluentMigratorDapper.Infrastructure
 {
     public class Class1
     {
