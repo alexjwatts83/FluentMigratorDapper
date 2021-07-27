@@ -30,7 +30,9 @@ namespace FluentMigratorDapper.WebUI
 
             services.Configure<ConnectionStringSettings>(_config.GetSection(ConnectionStringSettings.Section));
 
-            services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
+            services.AddTransient<ILocationsRepository, LocationsRepository>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            //services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

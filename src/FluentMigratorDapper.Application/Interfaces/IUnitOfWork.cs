@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace FluentMigratorDapper.Application.Interfaces
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork
     {
-        IGenericRepository<TEntity, TKey> Repository<TEntity, TKey>();
-        Task<int> Complete();
+        //IGenericRepository<TEntity, TKey> Repository<TEntity, TKey>() where TEntity : class;
+        ILocationsRepository Locations { get; }
+        //Task<int> Complete();
     }
 }
