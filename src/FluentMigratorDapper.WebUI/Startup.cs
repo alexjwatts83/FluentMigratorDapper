@@ -30,8 +30,6 @@ namespace FluentMigratorDapper.WebUI
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            services.AddPersistenceServices(_config);
-
             services.Configure<ConnectionStringSettings>(_config.GetSection(ConnectionStringSettings.Section));
 
             services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
