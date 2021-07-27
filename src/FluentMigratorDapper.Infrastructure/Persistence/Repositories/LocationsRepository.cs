@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Threading.Tasks;
+using Dapper;
 using FluentMigratorDapper.Application.Interfaces;
 using FluentMigratorDapper.Domain.Entities;
 using Microsoft.Extensions.Options;
@@ -12,36 +13,56 @@ namespace FluentMigratorDapper.Infrastructure.Persistence.Repositories
     {
         private readonly string _connectionString;
 
-        private IDbConnection _connection => new SqlConnection(_connectionString);
-
         public LocationsRepository(IOptions<ConnectionStringSettings> connectionStrings)
         {
             _connectionString = connectionStrings.Value.Database;
         }
 
-        public Task<Location> GetByIdAsync(string id)
+        public async Task<Location> GetByIdAsync(string id)
         {
-            throw new System.NotImplementedException();
+            const string sql = "SELECT TOP 1 * FROM Locations WHERE id = @id";
+            using var connection = new SqlConnection(_connectionString);
+            connection.Open();
+
+            return await connection.QuerySingleOrDefaultAsync<Location>(sql, new { Id = id });
         }
 
-        public Task<IReadOnlyList<Location>> GetAllAsync()
+        public async Task<IReadOnlyList<Location>> GetAllAsync()
         {
-            throw new System.NotImplementedException();
+            const string sql = "SELECT * FROM Locations";
+            using var connection = new SqlConnection(_connectionString);
+            connection.Open();
+
+            var result = await connection.QueryAsync<Location>(sql);
+            // TODO: double check the reasoning to use a IReadOnlyList compared to IEnumerable
+            return result.ToList().AsReadOnly();
         }
 
-        public Task<int> AddAsync(Location entity)
+        public async Task<int> AddAsync(Location entity)
         {
-            throw new System.NotImplementedException();
+            const string sql = "INSERT INTO Locations (Id,Name,State,City) values (@Id,@Name,@State,@City)";
+            using var connection = new SqlConnection(_connectionString);
+            connection.Open();
+
+            return await connection.ExecuteAsync(sql, entity);
         }
 
-        public Task<int> UpdateAsync(Location entity)
+        public async Task<int> UpdateAsync(Location entity)
         {
-            throw new System.NotImplementedException();
+            const string sql = "UPDATE Locations SET Id = @Id, Name = @Name, State = @State, City = @City)";
+            using var connection = new SqlConnection(_connectionString);
+            connection.Open();
+
+            return await connection.ExecuteAsync(sql, entity);
         }
 
-        public Task<int> DeleteAsync(string id)
+        public async Task<int> DeleteAsync(string id)
         {
-            throw new System.NotImplementedException();
+            const string sql = "DELETE FROM Locations WHERE Id = @Id";
+            using var connection = new SqlConnection(_connectionString);
+            connection.Open();
+
+            return await connection.ExecuteAsync(sql, new { Id = id });
         }
     }
 }
