@@ -23,12 +23,8 @@ namespace FluentMigratorDapper.WebUI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            
-            // In production, the Angular files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/dist";
-            });
+
+            services.AddSpaServices();
 
             services.Configure<ConnectionStringSettings>(_config.GetSection(ConnectionStringSettings.Section));
 

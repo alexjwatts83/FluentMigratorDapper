@@ -4,7 +4,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace FluentMigratorDapper.WebUI.Extensions
 {
-    public static class StartErrorConfigurationExtensions
+    public static class StartupErrorConfigurationExtensions
     {
         public static IApplicationBuilder ConfigureErrorUsing(this IApplicationBuilder app, IWebHostEnvironment env)
         {
