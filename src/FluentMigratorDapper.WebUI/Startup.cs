@@ -1,6 +1,7 @@
 using FluentMigratorDapper.Application.Interfaces;
 using FluentMigratorDapper.Infrastructure.Persistence;
 using FluentMigratorDapper.Infrastructure.Persistence.Repositories;
+using FluentMigratorDapper.WebUI.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
@@ -22,6 +23,7 @@ namespace FluentMigratorDapper.WebUI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -31,26 +33,19 @@ namespace FluentMigratorDapper.WebUI
             services.Configure<ConnectionStringSettings>(_config.GetSection(ConnectionStringSettings.Section));
 
             services.AddTransient<ILocationsRepository, LocationsRepository>();
+
             services.AddTransient<IUnitOfWork, UnitOfWork>();
-            //services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+            app.ConfigureErrorUsing(env);
 
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
+
             if (!env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();

@@ -1,6 +1,6 @@
 ﻿using FluentMigratorDapper.Application.Interfaces;
 
-namespace FluentMigratorDapper.Infrastructure.Persistence.Repositories
+namespace FluentMigratorDapper.Infrastructure.Persistence
 {
     public class UnitOfWork : IUnitOfWork
     {
