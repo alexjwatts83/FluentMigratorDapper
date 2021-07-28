@@ -1,9 +1,8 @@
-﻿using System.Linq;
-using FluentMigrator;
+﻿using FluentMigrator;
 
 namespace FluentMigratorDapper.Infrastructure.Persistence.Migrations
 {
-    [Tags("Development", "QA", "UAT")]
+    [Tags("Development")]
     public class NonProductionMigration : Migration
     {
         public override void Down()
