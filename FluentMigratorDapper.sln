@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentMigratorDapper.Domain", "src\FluentMigratorDapper.Domain\FluentMigratorDapper.Domain.csproj", "{37089305-52C6-4791-A54B-76E777EFAE78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentMigratorDapper.Domain", "src\FluentMigratorDapper.Domain\FluentMigratorDapper.Domain.csproj", "{37089305-52C6-4791-A54B-76E777EFAE78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentMigratorDapper.Infrastructure", "src\FluentMigratorDapper.Infrastructure\FluentMigratorDapper.Infrastructure.csproj", "{1D951AF5-07ED-4B53-B6FC-7208D40328C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentMigratorDapper.Infrastructure", "src\FluentMigratorDapper.Infrastructure\FluentMigratorDapper.Infrastructure.csproj", "{1D951AF5-07ED-4B53-B6FC-7208D40328C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentMigratorDapper.Application", "src\FluentMigratorDapper.Application\FluentMigratorDapper.Application.csproj", "{770BC0D0-96C2-4D8A-9494-E94691ECE4D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentMigratorDapper.Application", "src\FluentMigratorDapper.Application\FluentMigratorDapper.Application.csproj", "{770BC0D0-96C2-4D8A-9494-E94691ECE4D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentMigratorDapper.WebUI", "src\FluentMigratorDapper.WebUI\FluentMigratorDapper.WebUI.csproj", "{A4B4CB31-A813-4851-975A-D8D7C375DF38}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentMigratorDapper.WebApi", "src\FluentMigratorDapper.WebApi\FluentMigratorDapper.WebApi.csproj", "{C781912B-B137-47D4-A04E-CFD89DF93F1B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{770BC0D0-96C2-4D8A-9494-E94691ECE4D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{770BC0D0-96C2-4D8A-9494-E94691ECE4D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{770BC0D0-96C2-4D8A-9494-E94691ECE4D6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A4B4CB31-A813-4851-975A-D8D7C375DF38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A4B4CB31-A813-4851-975A-D8D7C375DF38}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A4B4CB31-A813-4851-975A-D8D7C375DF38}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A4B4CB31-A813-4851-975A-D8D7C375DF38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C781912B-B137-47D4-A04E-CFD89DF93F1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C781912B-B137-47D4-A04E-CFD89DF93F1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C781912B-B137-47D4-A04E-CFD89DF93F1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C781912B-B137-47D4-A04E-CFD89DF93F1B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
