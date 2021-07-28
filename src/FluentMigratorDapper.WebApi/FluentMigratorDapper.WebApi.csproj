@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>1c438d91-5552-4dfe-92f9-e6e25a5c61aa</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FluentMigratorDapper.Infrastructure\FluentMigratorDapper.Infrastructure.csproj" />
+  </ItemGroup>
 
 </Project>
