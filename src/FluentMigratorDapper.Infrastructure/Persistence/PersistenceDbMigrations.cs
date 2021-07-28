@@ -48,6 +48,10 @@ namespace FluentMigratorDapper.Infrastructure.Persistence
                     options.ShowSql = true;
                     options.ShowElapsedTime = true;
                 })
+                .Configure<RunnerOptions>(opt =>
+                {
+                    opt.Tags = new[] { "Production" };
+                })
                 // Build the service provider
                 .BuildServiceProvider(false);
         }
