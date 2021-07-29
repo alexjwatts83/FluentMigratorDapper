@@ -2,7 +2,7 @@
 
 namespace FluentMigratorDapper.Infrastructure.Persistence.Migrations
 {
-    [Tags("Production")]
+    [Tags("Production", "Development")]
     public class ProductionMigration : Migration
     {
         public override void Down()
