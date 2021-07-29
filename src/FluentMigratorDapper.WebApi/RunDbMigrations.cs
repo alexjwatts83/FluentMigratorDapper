@@ -5,7 +5,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace FluentMigratorDapper.WebApi
 {
-
     internal static class RunDbMigrations
     {
         internal static void Run(IHost host)

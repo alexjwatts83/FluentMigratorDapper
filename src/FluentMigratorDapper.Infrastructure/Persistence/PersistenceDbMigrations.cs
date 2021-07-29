@@ -48,10 +48,10 @@ namespace FluentMigratorDapper.Infrastructure.Persistence
                     options.ShowSql = true;
                     options.ShowElapsedTime = true;
                 })
-                .Configure<RunnerOptions>(opt =>
-                {
-                    opt.Tags = new[] { "Development" };
-                })
+                //.Configure<RunnerOptions>(opt =>
+                //{
+                //    //opt.Tags = new[] { "Development" };
+                //})
                 // Build the service provider
                 .BuildServiceProvider(false);
         }
@@ -63,6 +63,11 @@ namespace FluentMigratorDapper.Infrastructure.Persistence
         {
             // Instantiate the runner
             var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
+
+            if (runner.HasMigrationsToApplyDown(1))
+            {
+                runner.MigrateDown(1);
+            }
 
             runner.MigrateUp();
         }
