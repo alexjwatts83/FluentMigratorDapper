@@ -4,7 +4,7 @@ using FluentMigrator;
 namespace FluentMigratorDapper.Infrastructure.Persistence.Migrations
 {
     [Migration(20210728_213500)]
-    public class AddMovies : NonProductionMigration
+    public class AddMovies : Migration, INonProductionMigration
     {
         private void CreateMoviesTable()
         {

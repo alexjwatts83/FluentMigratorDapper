@@ -50,7 +50,7 @@ namespace FluentMigratorDapper.Infrastructure.Persistence
                 })
                 .Configure<RunnerOptions>(opt =>
                 {
-                    opt.Tags = new[] { "Production" };
+                    opt.Tags = new[] { "Development" };
                 })
                 // Build the service provider
                 .BuildServiceProvider(false);

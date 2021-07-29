@@ -4,7 +4,7 @@ using FluentMigrator;
 namespace FluentMigratorDapper.Infrastructure.Persistence.Migrations
 {
     [Migration(20210728_213000)]
-    public class AddTags : NonProductionMigration
+    public class AddTags : Migration, INonProductionMigration
     {
         private void CreateTagsTable()
         {
