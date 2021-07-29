@@ -13,15 +13,22 @@ namespace FluentMigratorDapper.WebApi
             var dbConnectionString = string.Empty;
             var masterDb = string.Empty;
             var mainDbName = string.Empty;
+            var tagsRaw = string.Empty;
+            var tags = new string[] { "Production" };
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
                 var config = services.GetRequiredService<IConfiguration>();
                 dbConnectionString = config.GetConnectionString("Database");
                 masterDb = config.GetConnectionString("Master");
-                mainDbName = config.GetConnectionString("MainDbName");
+                mainDbName = config.GetSection(FluentMigratorSettings.MainDbName).Value;
+                tagsRaw = config.GetSection(FluentMigratorSettings.Tags).Value;
+                if (!string.IsNullOrEmpty(tagsRaw))
+                {
+                    tags = tagsRaw.Split(",");
+                }
             }
-            var serviceProvider = PersistenceDbMigrations.CreateServices(dbConnectionString);
+            var serviceProvider = PersistenceDbMigrations.CreateServices(dbConnectionString, tags);
 
             PersistenceDbMigrations.EnsureDatabase(masterDb, mainDbName);
 

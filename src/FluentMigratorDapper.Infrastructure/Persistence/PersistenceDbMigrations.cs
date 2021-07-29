@@ -26,7 +26,7 @@ namespace FluentMigratorDapper.Infrastructure.Persistence
         /// <summary>
         /// Configure the dependency injection services
         /// </summary>
-        public static IServiceProvider CreateServices(string dbConnectionString)
+        public static IServiceProvider CreateServices(string dbConnectionString, string[] tags)
         {
             return new ServiceCollection()
                 // Add common FluentMigrator services
@@ -50,7 +50,8 @@ namespace FluentMigratorDapper.Infrastructure.Persistence
                 })
                 .Configure<RunnerOptions>(opt =>
                 {
-                    opt.Tags = new[] { "Development" };
+                    opt.Tags = tags;
+                    //opt.Tags = new[] { "Development" };
                 })
                 // Build the service provider
                 .BuildServiceProvider(false);
