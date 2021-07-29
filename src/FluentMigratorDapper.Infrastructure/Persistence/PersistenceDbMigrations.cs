@@ -50,7 +50,9 @@ namespace FluentMigratorDapper.Infrastructure.Persistence
                 })
                 //.Configure<RunnerOptions>(opt =>
                 //{
-                //    //opt.Tags = new[] { "Development" };
+                //    //opt.Tags = new[] { "Production", "Development" };
+                //    //opt.Tags = new[] {};
+                //    //opt. = true;
                 //})
                 // Build the service provider
                 .BuildServiceProvider(false);
@@ -63,13 +65,19 @@ namespace FluentMigratorDapper.Infrastructure.Persistence
         {
             // Instantiate the runner
             var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
+            //runner.ListMigrations();
+            //runner.ListMigrations();
+            //if (runner.HasMigrationsToApplyDown(1))
+            //{
+            //    runner.MigrateDown(1);
+            //}
 
-            if (runner.HasMigrationsToApplyDown(1))
-            {
-                runner.MigrateDown(1);
-            }
-
-            runner.MigrateUp();
+            runner.RollbackToVersion(1);
+            runner.MigrateDown(1);
+            //runner.ListMigrations();
+            //if (runner.HasMigrationsToApplyUp()) {
+            //    runner.MigrateUp();
+            //}
         }
     }
 }

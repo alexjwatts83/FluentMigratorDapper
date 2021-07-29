@@ -3,7 +3,7 @@
 namespace FluentMigratorDapper.Infrastructure.Persistence.Migrations
 {
     [Migration(20210721_145000)]
-    public class AddLocations : Migration
+    public class AddLocations : ProductionMigration
     {
         private void CreateLocationsTable()
         {
