@@ -10,33 +10,43 @@ namespace FluentMigratorDapper.WebApi
         internal static void Run(IHost host)
         {
             // Run db Migrations
-            var dbConnectionString = string.Empty;
-            var masterDb = string.Empty;
-            var mainDbName = string.Empty;
-            var tagsRaw = string.Empty;
-            var tags = new string[] { "Development" };
+            var options = GetFluentMigratorOptions(host);
+            var serviceProvider = PersistenceDbMigrations.CreateServices(options.DbConnectionString, options.Tags);
+
+            PersistenceDbMigrations.EnsureDatabase(options.MasterDb, options.MainDbName);
+
+            // Put the database update into a scope to ensure that all resources will be disposed.
+            using var scope = serviceProvider.CreateScope();
+
+            PersistenceDbMigrations.UpdateDatabase(scope.ServiceProvider);
+        }
+
+        private static FluentMigratorOptions GetFluentMigratorOptions(IHost host)
+        {
+            var options = new FluentMigratorOptions();
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
                 var config = services.GetRequiredService<IConfiguration>();
-                dbConnectionString = config.GetConnectionString("Database");
-                masterDb = config.GetConnectionString("Master");
-                mainDbName = config.GetSection(FluentMigratorSettings.MainDbName).Value;
-                tagsRaw = config.GetSection(FluentMigratorSettings.Tags).Value;
-                if (!string.IsNullOrEmpty(tagsRaw))
-                {
-                    tags = tagsRaw.Split(",");
-                }
+                options.DbConnectionString = config.GetConnectionString("Database");
+                options.MasterDb = config.GetConnectionString("Master");
+                options.MainDbName = config.GetSection(FluentMigratorSettings.MainDbName).Value;
+                options.TagsRaw = config.GetSection(FluentMigratorSettings.Tags).Value;
             }
-            var serviceProvider = PersistenceDbMigrations.CreateServices(dbConnectionString, tags);
-
-            PersistenceDbMigrations.EnsureDatabase(masterDb, mainDbName);
-
-            // Put the database update into a scope to ensure that all resources will be disposed.
-            using (var scope = serviceProvider.CreateScope())
-            {
-                PersistenceDbMigrations.UpdateDatabase(scope.ServiceProvider);
-            }
+            return options;
         }
+    }
+
+    internal class FluentMigratorOptions
+    {
+        public FluentMigratorOptions()
+        {
+            TagsRaw = "Development";
+        }
+        public string DbConnectionString { get; set; }
+        public string MasterDb { get; set; }
+        public string MainDbName { get; set; }
+        public string TagsRaw { get; set; }
+        public string[] Tags => TagsRaw.Split(",");
     }
 }
