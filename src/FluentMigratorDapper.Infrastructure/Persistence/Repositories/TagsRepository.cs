@@ -14,10 +14,10 @@ namespace FluentMigratorDapper.Infrastructure.Persistence.Repositories
 
         public override string GetAllAsyncSql => "SELECT * FROM Tags";
 
-        public override string AddAsyncSql => "INSERT INTO Tags (Id,Name) values (@Id,@Name)";
+        public override string AddAsyncSql => "INSERT INTO Tags (Id,Name) VALUES (@Id,@Name)";
 
-        public override string UpdateAsyncSql => "UPDATE Tags SET Id = @Id, Name = @Name";
+        public override string UpdateAsyncSql => "UPDATE Tags SET Name = @Name WHERE Id = @Id";
 
-        public override string DeleteAsyncSql => "DELETE FROM Locations WHERE Id = @Id";
+        public override string DeleteAsyncSql => "DELETE FROM Tags WHERE Id = @Id";
     }
 }

@@ -14,9 +14,9 @@ namespace FluentMigratorDapper.Infrastructure.Persistence.Repositories
 
         public override string GetAllAsyncSql => "SELECT * FROM Locations";
 
-        public override string AddAsyncSql => "INSERT INTO Locations (Id,Name,State,City) values (@Id,@Name,@State,@City)";
+        public override string AddAsyncSql => "INSERT INTO Locations (Id,Name,State,City) VALUES (@Id,@Name,@State,@City)";
 
-        public override string UpdateAsyncSql => "UPDATE Locations SET Id = @Id, Name = @Name, State = @State, City = @City";
+        public override string UpdateAsyncSql => "UPDATE Locations SET Name = @Name, State = @State, City = @City WHERE Id = @Id";
 
         public override string DeleteAsyncSql => "DELETE FROM Locations WHERE Id = @Id";
     }
