@@ -14,7 +14,7 @@ namespace FluentMigratorDapper.WebApi
             var masterDb = string.Empty;
             var mainDbName = string.Empty;
             var tagsRaw = string.Empty;
-            var tags = new string[] { "Production" };
+            var tags = new string[] { "Development" };
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;

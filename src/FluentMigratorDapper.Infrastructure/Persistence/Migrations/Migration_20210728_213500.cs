@@ -20,7 +20,7 @@ namespace FluentMigratorDapper.Infrastructure.Persistence.Migrations
                 Insert.IntoTable("Movies")
                     .Row(new
                     {
-                        Name = $"Movie {i:D2}"
+                        Name = $"Movie-{i:D2}"
                     });
             }
         }

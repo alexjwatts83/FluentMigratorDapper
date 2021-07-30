@@ -17,11 +17,11 @@ namespace FluentMigratorDapper.Infrastructure.Persistence.Migrations
         {
             foreach(var i in Enumerable.Range(1, 10))
             {
-                Insert.IntoTable("Locations")
+                Insert.IntoTable("Tags")
                     .Row(new
                     {
                         Id = $"t{i:D2}",
-                        Name = $"Tag {i:D2}"
+                        Name = $"Tag-{i:D2}"
                     });
             }
         }
