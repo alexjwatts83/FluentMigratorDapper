@@ -16,11 +16,11 @@ namespace FluentMigratorDapper.Infrastructure.Persistence
 
         public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
-            //services.Configure<ConnectionStringSettings>(configuration.GetSection(ConnectionStringSettings.Section));
+            services.Configure<ConnectionStringSettings>(configuration.GetSection(ConnectionStringSettings.Section));
 
-            //services.AddTransient<ILocationsRepository, LocationsRepository>();
+            services.AddTransient<ILocationsRepository, LocationsRepository>();
 
-            //services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             return services;
         }

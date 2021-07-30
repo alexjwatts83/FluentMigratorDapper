@@ -11,6 +11,7 @@ namespace FluentMigratorDapper.WebApi
         {
             // Run db Migrations
             var options = GetFluentMigratorOptions(host);
+
             var serviceProvider = PersistenceDbMigrations.CreateServices(options.DbConnectionString, options.Tags);
 
             PersistenceDbMigrations.EnsureDatabase(options.MasterDb, options.MainDbName);

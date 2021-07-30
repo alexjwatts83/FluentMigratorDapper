@@ -1,6 +1,4 @@
-using FluentMigratorDapper.Application.Interfaces;
 using FluentMigratorDapper.Infrastructure.Persistence;
-using FluentMigratorDapper.Infrastructure.Persistence.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -22,12 +20,6 @@ namespace FluentMigratorDapper.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
-            services.Configure<ConnectionStringSettings>(Configuration.GetSection(ConnectionStringSettings.Section));
-
-            services.AddTransient<ILocationsRepository, LocationsRepository>();
-
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.AddPersistenceServices(Configuration);
         }
