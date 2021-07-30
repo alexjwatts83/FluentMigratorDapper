@@ -12,6 +12,7 @@ namespace FluentMigratorDapper.Infrastructure.Persistence
             services.Configure<ConnectionStringSettings>(configuration.GetSection(ConnectionStringSettings.Section));
 
             services.AddTransient<ILocationsRepository, LocationsRepository>();
+            services.AddTransient<ITagsRepository, TagsRepository>();
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
