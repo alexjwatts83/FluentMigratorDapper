@@ -46,7 +46,23 @@ namespace FluentMigratorDapper.WebApi.Controllers
         public async Task<IActionResult> Insert(Location location)
         {
             var result = await _unitOfWork.Locations.AddAsync(location);
-            return Ok(result);
+            if (result == 0)
+            {
+                return BadRequest($"Failed to insert location id of '{location.Id}' with name of {location.Name}");
+            }
+            return await GetById(location.Id);
+        }
+
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> Update(Location location)
+        {
+            var result = await _unitOfWork.Locations.UpdateAsync(location);
+            if (result == 0)
+            {
+                return BadRequest($"Failed to update location id of '{location.Id}'");
+            }
+            return await GetById(location.Id);
         }
     }
 }
