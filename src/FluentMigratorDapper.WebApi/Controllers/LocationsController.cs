@@ -64,5 +64,17 @@ namespace FluentMigratorDapper.WebApi.Controllers
             }
             return await GetById(location.Id);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var result = await _unitOfWork.Locations.DeleteAsync(id);
+
+            if (result == 0)
+            {
+                return BadRequest($"Failed to update location id of '{id}'");
+            }
+            return Ok($"Deleted location with id of {id}");
+        }
     }
 }
