@@ -14,13 +14,13 @@ namespace FluentMigratorDapper.Infrastructure.Persistence.Repositories
     {
         private readonly string _connectionString;
 
-        public string GetByIdAsyncSql => _scripts.GetByIdAsyncSql;
-        public string GetAllAsyncSql => _scripts.GetAllAsyncSql;
-        public string AddAsyncSql => _scripts.AddAsyncSql;
-        public string UpdateAsyncSql => _scripts.UpdateAsyncSql;
-        public string DeleteAsyncSql => _scripts.DeleteAsyncSql;
+        private string GetByIdAsyncSql => _scripts.GetByIdAsyncSql;
+        private string GetAllAsyncSql => _scripts.GetAllAsyncSql;
+        private string AddAsyncSql => _scripts.AddAsyncSql;
+        private string UpdateAsyncSql => _scripts.UpdateAsyncSql;
+        private string DeleteAsyncSql => _scripts.DeleteAsyncSql;
 
-        private IGenericCrudRepositoryScripts _scripts;
+        private readonly IGenericCrudRepositoryScripts _scripts;
 
         public GenericCrudRepository(IOptions<ConnectionStringSettings> connectionStrings, IGenericCrudRepositoryScripts scripts)
         {

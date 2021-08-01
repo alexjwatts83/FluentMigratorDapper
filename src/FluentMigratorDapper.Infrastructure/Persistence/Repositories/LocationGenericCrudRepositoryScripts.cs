@@ -1,6 +1,4 @@
 ﻿using FluentMigratorDapper.Application.Interfaces;
-using FluentMigratorDapper.Domain.Entities;
-using Microsoft.Extensions.Options;
 
 namespace FluentMigratorDapper.Infrastructure.Persistence.Repositories
 {
