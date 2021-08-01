@@ -18,7 +18,7 @@ namespace FluentMigratorDapper.Infrastructure.Persistence
         }
 
         public IGenericCrudRepository<TEntity, TKey> Repository<TEntity, TKey>(IGenericCrudRepositoryScripts scripts)
-            where TEntity : BaseEntity
+            where TEntity : BaseEntity<TKey>
         {
             if (_repositories == null) _repositories = new Hashtable();
 

@@ -10,7 +10,7 @@ using Microsoft.Extensions.Options;
 namespace FluentMigratorDapper.Infrastructure.Persistence.Repositories
 {
     public class GenericCrudRepository<TEntity, TKey> : IGenericCrudRepository<TEntity, TKey>
-        where TEntity : BaseEntity
+        where TEntity : BaseEntity<TKey>
     {
         private readonly string _connectionString;
 

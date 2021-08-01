@@ -4,7 +4,7 @@ using FluentMigratorDapper.Domain.Entities;
 
 namespace FluentMigratorDapper.Application.Interfaces
 {
-    public interface IGenericCrudRepository<TEntity, TKey> where TEntity : BaseEntity
+    public interface IGenericCrudRepository<TEntity, TKey> where TEntity : BaseEntity<TKey>
     {
         //IGenericCrudRepositoryScripts Scripts { get; }
         Task<TEntity> GetByIdAsync(TKey id);
