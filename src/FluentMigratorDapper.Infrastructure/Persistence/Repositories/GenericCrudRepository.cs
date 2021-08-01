@@ -4,12 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using FluentMigratorDapper.Application.Interfaces;
+using FluentMigratorDapper.Domain.Entities;
 using Microsoft.Extensions.Options;
 
 namespace FluentMigratorDapper.Infrastructure.Persistence.Repositories
 {
     public class GenericCrudRepository<TEntity, TKey> : IGenericCrudRepository<TEntity, TKey>
-        where TEntity : class
+        where TEntity : BaseEntity
         //where TScripts : IGenericCrudRepositoryScripts
     {
         public readonly string ConnectionString;
@@ -22,10 +23,17 @@ namespace FluentMigratorDapper.Infrastructure.Persistence.Repositories
 
         private IGenericCrudRepositoryScripts _scripts;
 
-        protected GenericCrudRepository(IOptions<ConnectionStringSettings> connectionStrings, IGenericCrudRepositoryScripts scripts)
+        protected GenericCrudRepository(string connectionString, IGenericCrudRepositoryScripts scripts)
         {
-            ConnectionString = connectionStrings.Value.Database;
+            ConnectionString = connectionString;
             _scripts = scripts;
+        }
+
+
+        protected GenericCrudRepository(IOptions<ConnectionStringSettings> connectionStrings, IGenericCrudRepositoryScripts scripts) :
+            this(connectionStrings.Value.Database, scripts)
+        {
+
         }
 
         //public void SetScripts(IGenericCrudRepositoryScripts scripts)

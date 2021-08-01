@@ -1,6 +1,10 @@
 ﻿namespace FluentMigratorDapper.Domain.Entities
 {
-    public class Location
+    public class BaseEntity
+    {
+
+    }
+    public class Location : BaseEntity
     {
         public Location()
         {

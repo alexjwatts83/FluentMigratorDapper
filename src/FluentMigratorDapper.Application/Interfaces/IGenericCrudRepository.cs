@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using FluentMigratorDapper.Domain.Entities;
 
 namespace FluentMigratorDapper.Application.Interfaces
 {
-    public interface IGenericCrudRepository<TEntity, TKey> where TEntity : class
+    public interface IGenericCrudRepository<TEntity, TKey> where TEntity : BaseEntity
     {
         //IGenericCrudRepositoryScripts Scripts { get; }
         Task<TEntity> GetByIdAsync(TKey id);
