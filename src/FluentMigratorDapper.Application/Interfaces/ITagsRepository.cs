@@ -2,8 +2,8 @@
 
 namespace FluentMigratorDapper.Application.Interfaces
 {
-    public interface ITagsRepository : IGenericRepository<Tags, string>
-    {
+    //public interface ITagsRepository : IGenericRepository<Tags, string>
+    //{
 
-    }
+    //}
 }

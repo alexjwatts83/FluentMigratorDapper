@@ -4,27 +4,33 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using FluentMigratorDapper.Application.Interfaces;
+using FluentMigratorDapper.Domain.Entities;
 using Microsoft.Extensions.Options;
 
 namespace FluentMigratorDapper.Infrastructure.Persistence.Repositories
 {
-    public abstract class BaseRepository<TEntity, TKey> : IGenericRepository<TEntity, TKey> where TEntity : class
+    public class GenericCrudRepository<TEntity, TKey> : IGenericCrudRepository<TEntity, TKey>
+        where TEntity : BaseEntity
     {
-        public readonly string ConnectionString;
-        public abstract string GetByIdAsyncSql { get; }
-        public abstract string GetAllAsyncSql { get; }
-        public abstract string AddAsyncSql { get; }
-        public abstract string UpdateAsyncSql { get; }
-        public abstract string DeleteAsyncSql { get; }
+        private readonly string _connectionString;
 
-        protected BaseRepository(IOptions<ConnectionStringSettings> connectionStrings)
+        public string GetByIdAsyncSql => _scripts.GetByIdAsyncSql;
+        public string GetAllAsyncSql => _scripts.GetAllAsyncSql;
+        public string AddAsyncSql => _scripts.AddAsyncSql;
+        public string UpdateAsyncSql => _scripts.UpdateAsyncSql;
+        public string DeleteAsyncSql => _scripts.DeleteAsyncSql;
+
+        private IGenericCrudRepositoryScripts _scripts;
+
+        public GenericCrudRepository(IOptions<ConnectionStringSettings> connectionStrings, IGenericCrudRepositoryScripts scripts)
         {
-            ConnectionString = connectionStrings.Value.Database;
+            _connectionString = connectionStrings.Value.Database;
+            _scripts = scripts;
         }
 
         protected async Task<TEntity> QuerySingleOrDefaultAsync(string sql, TKey id)
         {
-            using var connection = new SqlConnection(ConnectionString);
+            using var connection = new SqlConnection(_connectionString);
             connection.Open();
 
             return await connection.QuerySingleOrDefaultAsync<TEntity>(sql, new { Id = id });
@@ -32,7 +38,7 @@ namespace FluentMigratorDapper.Infrastructure.Persistence.Repositories
 
         protected async Task<IReadOnlyList<TEntity>> QueryAsync(string sql)
         {
-            using var connection = new SqlConnection(ConnectionString);
+            using var connection = new SqlConnection(_connectionString);
             connection.Open();
 
             var result = await connection.QueryAsync<TEntity>(sql);
@@ -42,7 +48,7 @@ namespace FluentMigratorDapper.Infrastructure.Persistence.Repositories
 
         public async Task<int> ExecuteAsync(string sql, object param)
         {
-            using var connection = new SqlConnection(ConnectionString);
+            using var connection = new SqlConnection(_connectionString);
             connection.Open();
 
             return await connection.ExecuteAsync(sql, param);

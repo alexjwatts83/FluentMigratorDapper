@@ -10,9 +10,8 @@ namespace FluentMigratorDapper.Infrastructure.Persistence
         public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<ConnectionStringSettings>(configuration.GetSection(ConnectionStringSettings.Section));
-            services.AddTransient<ILocationsRepository, LocationsRepository>();
-            services.AddTransient<ITagsRepository, TagsRepository>();
-            services.AddTransient<IMoviesRepository, MoviesRepository>();
+            services.AddTransient<ILocationGenericCrudRepositoryScripts, LocationGenericCrudRepositoryScripts>();
+            services.AddScoped(typeof(IGenericCrudRepository<,>), typeof(GenericCrudRepository<,>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             return services;

@@ -2,8 +2,8 @@
 
 namespace FluentMigratorDapper.Application.Interfaces
 {
-    public interface IMoviesRepository : IGenericRepository<Movies, int>
-    {
+    //public interface IMoviesRepository : IGenericRepository<Movies, int>
+    //{
 
-    }
+    //}
 }

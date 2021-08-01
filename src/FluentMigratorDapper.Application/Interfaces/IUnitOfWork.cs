@@ -1,7 +1,10 @@
-﻿namespace FluentMigratorDapper.Application.Interfaces
+﻿using FluentMigratorDapper.Domain.Entities;
+
+namespace FluentMigratorDapper.Application.Interfaces
 {
     public interface IUnitOfWork
     {
-        ILocationsRepository Locations { get; }
+        IGenericCrudRepository<TEntity, TKey> Repository<TEntity, TKey>(IGenericCrudRepositoryScripts scripts)
+            where TEntity : BaseEntity;
     }
 }

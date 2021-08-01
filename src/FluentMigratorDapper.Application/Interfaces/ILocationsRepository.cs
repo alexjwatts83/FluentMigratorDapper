@@ -2,8 +2,8 @@
 
 namespace FluentMigratorDapper.Application.Interfaces
 {
-    public interface ILocationsRepository : IGenericRepository<Location, string>
-    {
+    //public interface ILocationsRepository : IGenericRepository<Location, string>
+    //{
 
-    }
+    //}
 }
