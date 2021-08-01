@@ -1,8 +1,7 @@
 ﻿namespace FluentMigratorDapper.Domain.Entities
 {
-    public class Movies
+    public class Movies : BaseEntity<int>
     {
-        public int Id { get; set; }
         public string Name { get; set; }
     }
 }
