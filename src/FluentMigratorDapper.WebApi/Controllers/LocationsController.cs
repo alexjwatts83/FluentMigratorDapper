@@ -1,6 +1,6 @@
 ﻿using FluentMigratorDapper.Application.Interfaces;
 using FluentMigratorDapper.Domain.Entities;
-using FluentMigratorDapper.Infrastructure.Persistence.Repositories;
+using FluentMigratorDapper.Infrastructure.Persistence.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FluentMigratorDapper.WebApi.Controllers
