@@ -51,7 +51,7 @@ namespace FluentMigratorDapper.WebApi.Controllers
 
             if (result == 0)
             {
-                return BadRequest($"Failed to insert location id of '{location.Id}'");
+                return BadRequest($"Failed to insert {typeof(TEntity).Name} id of '{location.Id}'");
             }
             return await GetById(location.Id);
         }
@@ -63,7 +63,7 @@ namespace FluentMigratorDapper.WebApi.Controllers
             var result = await _unitOfWork.Repository<TEntity, TKey>(_scripts).UpdateAsync(location);
             if (result == 0)
             {
-                return BadRequest($"Failed to update location id of '{location.Id}'");
+                return BadRequest($"Failed to update {typeof(TEntity).Name} id of '{location.Id}'");
             }
             return await GetById(location.Id);
         }
@@ -75,9 +75,9 @@ namespace FluentMigratorDapper.WebApi.Controllers
 
             if (result == 0)
             {
-                return BadRequest($"Failed to update location id of '{id}'");
+                return BadRequest($"Failed to update {typeof(TEntity).Name} id of '{id}'");
             }
-            return Ok($"Deleted location with id of {id}");
+            return Ok($"Deleted {typeof(TEntity).Name} with id of {id}");
         }
     }
 }
