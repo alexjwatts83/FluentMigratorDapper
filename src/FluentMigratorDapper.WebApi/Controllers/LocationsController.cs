@@ -6,15 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FluentMigratorDapper.WebApi.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
-    public class LocationsController : ControllerBase
+    public class LocationsController : BaseApiController
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public LocationsController(IUnitOfWork unitOfWork)
+        public LocationsController(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-            _unitOfWork = unitOfWork;
         }
 
         [HttpGet]
