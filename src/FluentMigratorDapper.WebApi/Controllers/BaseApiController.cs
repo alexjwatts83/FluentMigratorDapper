@@ -45,27 +45,27 @@ namespace FluentMigratorDapper.WebApi.Controllers
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> Insert(TEntity location)
+        public async Task<IActionResult> Insert(TEntity entity)
         {
-            var result = await _unitOfWork.Repository<TEntity, TKey>(_scripts).AddAsync(location);
+            var result = await _unitOfWork.Repository<TEntity, TKey>(_scripts).AddAsync(entity);
 
-            if (result == 0)
+            if (result.Result == 0)
             {
-                return BadRequest($"Failed to insert {typeof(TEntity).Name} id of '{location.Id}'");
+                return BadRequest($"Failed to insert {typeof(TEntity).Name} id of '{entity.Id}'");
             }
-            return await GetById(location.Id);
+            return await GetById(entity.Id);
         }
 
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> Update(TEntity location)
+        public async Task<IActionResult> Update(TEntity entity)
         {
-            var result = await _unitOfWork.Repository<TEntity, TKey>(_scripts).UpdateAsync(location);
+            var result = await _unitOfWork.Repository<TEntity, TKey>(_scripts).UpdateAsync(entity);
             if (result == 0)
             {
-                return BadRequest($"Failed to update {typeof(TEntity).Name} id of '{location.Id}'");
+                return BadRequest($"Failed to update {typeof(TEntity).Name} id of '{entity.Id}'");
             }
-            return await GetById(location.Id);
+            return await GetById(entity.Id);
         }
 
         [HttpDelete("{id}")]

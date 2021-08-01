@@ -64,9 +64,10 @@ namespace FluentMigratorDapper.Infrastructure.Persistence.Repositories
             return await QueryAsync(GetAllAsyncSql);
         }
 
-        public async Task<int> AddAsync(TEntity entity)
+        public async Task<AddResult<TKey, TEntity>> AddAsync(TEntity entity)
         {
-            return await ExecuteAsync(AddAsyncSql, entity);
+            var addResult = await ExecuteAsync(AddAsyncSql, entity);
+            return new AddResult<TKey, TEntity>();
         }
 
         public async Task<int> UpdateAsync(TEntity entity)
