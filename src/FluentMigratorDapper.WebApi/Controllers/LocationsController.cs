@@ -22,7 +22,7 @@ namespace FluentMigratorDapper.WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Get()
         {
-            var repo = _unitOfWork.Repository<Location>(_locationScripts);
+            var repo = _unitOfWork.Repository<Location, string>(_locationScripts);
             var list = await repo.GetAllAsync();
             if (list == null)
             {
@@ -35,7 +35,7 @@ namespace FluentMigratorDapper.WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetById(string Id)
         {
-            var item = await _unitOfWork.Repository<Location>(_locationScripts).GetByIdAsync(Id);
+            var item = await _unitOfWork.Repository<Location, string>(_locationScripts).GetByIdAsync(Id);
             if (item == null)
             {
                 return NotFound();

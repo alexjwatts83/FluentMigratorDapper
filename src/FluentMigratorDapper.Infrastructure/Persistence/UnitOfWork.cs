@@ -11,30 +11,28 @@ namespace FluentMigratorDapper.Infrastructure.Persistence
     {
         private readonly IOptions<ConnectionStringSettings> _connectionStrings;
         private Hashtable _repositories;
-        private Hashtable _keys;
-        private Hashtable _scripts;
 
         public UnitOfWork(IOptions<ConnectionStringSettings> connectionStrings)
         {
             _connectionStrings = connectionStrings;
         }
 
-        public IGenericCrudRepository<TEntity> Repository<TEntity>(IGenericCrudRepositoryScripts scripts)
+        public IGenericCrudRepository<TEntity, TKey> Repository<TEntity, TKey>(IGenericCrudRepositoryScripts scripts)
             where TEntity : BaseEntity
         {
             if (_repositories == null) _repositories = new Hashtable();
 
-            var type = typeof(TEntity).Name;
+            var repoKey = $"{typeof(TEntity).Name}-{typeof(TKey).Name}";
 
-            if (!_repositories.ContainsKey(type))
+            if (!_repositories.ContainsKey(repoKey))
             {
-                var repositoryType = typeof(GenericCrudRepository<>);
-                var repositoryInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(TEntity)), _connectionStrings, scripts);
+                var repositoryType = typeof(GenericCrudRepository<,>);
+                var repositoryInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(TEntity), typeof(TKey)), _connectionStrings, scripts);
 
-                _repositories.Add(type, repositoryInstance);
+                _repositories.Add(repoKey, repositoryInstance);
             }
 
-            return (IGenericCrudRepository<TEntity>)_repositories[type];
+            return (IGenericCrudRepository<TEntity, TKey>)_repositories[repoKey];
         }
     }
 }
