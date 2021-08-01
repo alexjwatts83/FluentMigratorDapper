@@ -49,11 +49,12 @@ namespace FluentMigratorDapper.WebApi.Controllers
         {
             var result = await _unitOfWork.Repository<TEntity, TKey>(_scripts).AddAsync(entity);
 
-            if (result.Result == 0)
+            if (result.Entity is null)
             {
                 return BadRequest($"Failed to insert {typeof(TEntity).Name} id of '{entity.Id}'");
             }
-            return await GetById(entity.Id);
+
+            return Ok(result.Entity);
         }
 
         [HttpPut]

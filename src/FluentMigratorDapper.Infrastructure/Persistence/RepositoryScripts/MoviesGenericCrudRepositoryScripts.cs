@@ -8,7 +8,7 @@ namespace FluentMigratorDapper.Infrastructure.Persistence.RepositoryScripts
 
         public string GetAllAsyncSql => "SELECT * FROM [Movies]";
 
-        public string AddAsyncSql => "INSERT INTO [Movies] (Name) VALUES (@Name)";
+        public string AddAsyncSql => "INSERT INTO [Movies] (Name) VALUES (@Name);SELECT * FROM Movies WHERE Id = CAST(SCOPE_IDENTITY() AS INT);";
 
         public string UpdateAsyncSql => "UPDATE [Movies] SET Name = @Name WHERE Id = @Id";
 

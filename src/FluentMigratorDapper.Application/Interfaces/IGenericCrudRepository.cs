@@ -8,7 +8,7 @@ namespace FluentMigratorDapper.Application.Interfaces
     {
         Task<TEntity> GetByIdAsync(TKey id);
         Task<IReadOnlyList<TEntity>> GetAllAsync();
-        Task<AddResult<TKey, TEntity>> AddAsync(TEntity entity);
+        Task<AddResult<TEntity>> AddAsync(TEntity entity);
         Task<int> UpdateAsync(TEntity entity);
         Task<int> DeleteAsync(TKey id);
     }
