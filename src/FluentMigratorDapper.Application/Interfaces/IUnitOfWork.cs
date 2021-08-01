@@ -2,6 +2,7 @@
 {
     public interface IUnitOfWork
     {
-        ILocationsRepository Locations { get; }
+        IGenericCrudRepository<TEntity, TKey> Repository<TEntity, TKey>(IGenericCrudRepositoryScripts scripts)
+            where TEntity : class;
     }
 }

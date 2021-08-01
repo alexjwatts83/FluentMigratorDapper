@@ -3,8 +3,9 @@ using System.Threading.Tasks;
 
 namespace FluentMigratorDapper.Application.Interfaces
 {
-    public interface IGenericRepository<TEntity, TKey> where TEntity : class
+    public interface IGenericCrudRepository<TEntity, TKey> where TEntity : class
     {
+        //IGenericCrudRepositoryScripts Scripts { get; }
         Task<TEntity> GetByIdAsync(TKey id);
         Task<IReadOnlyList<TEntity>> GetAllAsync();
         Task<int> AddAsync(TEntity entity);
