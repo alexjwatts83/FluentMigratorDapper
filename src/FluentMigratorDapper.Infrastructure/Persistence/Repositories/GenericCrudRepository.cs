@@ -9,7 +9,7 @@ using Microsoft.Extensions.Options;
 
 namespace FluentMigratorDapper.Infrastructure.Persistence.Repositories
 {
-    public class GenericCrudRepository<TEntity, TKey> : IGenericCrudRepository<TEntity, TKey>
+    public class GenericCrudRepository<TEntity> : IGenericCrudRepository<TEntity>
         where TEntity : BaseEntity
         //where TScripts : IGenericCrudRepositoryScripts
     {
@@ -23,25 +23,13 @@ namespace FluentMigratorDapper.Infrastructure.Persistence.Repositories
 
         private IGenericCrudRepositoryScripts _scripts;
 
-        protected GenericCrudRepository(string connectionString, IGenericCrudRepositoryScripts scripts)
+        public GenericCrudRepository(IOptions<ConnectionStringSettings> connectionStrings, IGenericCrudRepositoryScripts scripts)
         {
-            ConnectionString = connectionString;
+            ConnectionString = connectionStrings.Value.Database;
             _scripts = scripts;
         }
 
-
-        protected GenericCrudRepository(IOptions<ConnectionStringSettings> connectionStrings, IGenericCrudRepositoryScripts scripts) :
-            this(connectionStrings.Value.Database, scripts)
-        {
-
-        }
-
-        //public void SetScripts(IGenericCrudRepositoryScripts scripts)
-        //{
-        //    _scripts = scripts;
-        //}
-
-        protected async Task<TEntity> QuerySingleOrDefaultAsync(string sql, TKey id)
+        protected async Task<TEntity> QuerySingleOrDefaultAsync(string sql, string id)
         {
             using var connection = new SqlConnection(ConnectionString);
             connection.Open();
@@ -67,7 +55,7 @@ namespace FluentMigratorDapper.Infrastructure.Persistence.Repositories
             return await connection.ExecuteAsync(sql, param);
         }
 
-        public async Task<TEntity> GetByIdAsync(TKey id)
+        public async Task<TEntity> GetByIdAsync(string id)
         {
             return await QuerySingleOrDefaultAsync(GetByIdAsyncSql, id);
         }
@@ -87,7 +75,7 @@ namespace FluentMigratorDapper.Infrastructure.Persistence.Repositories
             return await ExecuteAsync(UpdateAsyncSql, entity);
         }
 
-        public async Task<int> DeleteAsync(TKey id)
+        public async Task<int> DeleteAsync(string id)
         {
             return await ExecuteAsync(DeleteAsyncSql, new { Id = id });
         }

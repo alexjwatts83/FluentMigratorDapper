@@ -22,7 +22,7 @@ namespace FluentMigratorDapper.WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Get()
         {
-            var repo = _unitOfWork.Repository<Location, string>(_locationScripts);
+            var repo = _unitOfWork.Repository<Location>(_locationScripts);
             var list = await repo.GetAllAsync();
             if (list == null)
             {
@@ -31,17 +31,17 @@ namespace FluentMigratorDapper.WebApi.Controllers
             return Ok(list);
         }
 
-        //[HttpGet("{id}")]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //public async Task<IActionResult> GetById(string Id)
-        //{
-        //    var item = await _unitOfWork.Locations.GetByIdAsync(Id);
-        //    if(item == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(item);
-        //}
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetById(string Id)
+        {
+            var item = await _unitOfWork.Repository<Location>(_locationScripts).GetByIdAsync(Id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+            return Ok(item);
+        }
 
         //[HttpPost]
         //[ProducesResponseType(StatusCodes.Status200OK)]
