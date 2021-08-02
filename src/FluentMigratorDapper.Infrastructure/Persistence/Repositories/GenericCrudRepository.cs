@@ -31,6 +31,7 @@ namespace FluentMigratorDapper.Infrastructure.Persistence.Repositories
         protected async Task<TEntity> QuerySingleOrDefaultAsync(string sql, TKey id)
         {
             using var connection = new SqlConnection(_connectionString);
+
             connection.Open();
 
             return await connection.QuerySingleOrDefaultAsync<TEntity>(sql, new { Id = id });
@@ -39,6 +40,7 @@ namespace FluentMigratorDapper.Infrastructure.Persistence.Repositories
         protected async Task<IReadOnlyList<TEntity>> QueryAsync(string sql)
         {
             using var connection = new SqlConnection(_connectionString);
+
             connection.Open();
 
             var result = await connection.QueryAsync<TEntity>(sql);
@@ -49,6 +51,7 @@ namespace FluentMigratorDapper.Infrastructure.Persistence.Repositories
         public async Task<int> ExecuteAsync(string sql, object param)
         {
             using var connection = new SqlConnection(_connectionString);
+
             connection.Open();
 
             return await connection.ExecuteAsync(sql, param);
@@ -64,7 +67,7 @@ namespace FluentMigratorDapper.Infrastructure.Persistence.Repositories
             return await QueryAsync(GetAllAsyncSql);
         }
 
-        public async Task<AddResult<TEntity>> AddAsync(TEntity entity)
+        public async Task<TEntity> AddAsync(TEntity entity)
         {
             using var connection = new SqlConnection(_connectionString);
             
@@ -72,10 +75,7 @@ namespace FluentMigratorDapper.Infrastructure.Persistence.Repositories
 
             var result = await connection.QueryAsync<TEntity>(AddAsyncSql, entity);
 
-            return new AddResult<TEntity>()
-            {
-                Entity = result.SingleOrDefault()
-            };
+            return result.SingleOrDefault();
         }
 
         public async Task<int> UpdateAsync(TEntity entity)
