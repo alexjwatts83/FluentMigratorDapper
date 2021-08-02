@@ -7,7 +7,7 @@ using FluentMigrator.Runner.Initialization;
 using FluentMigratorDapper.Infrastructure.Persistence.Migrations;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace FluentMigratorDapper.Infrastructure.Persistence
+namespace FluentMigratorDapper.Infrastructure.Persistence.DependencyInjection
 {
     public static class PersistenceDbMigrations
     {

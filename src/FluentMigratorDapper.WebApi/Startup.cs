@@ -1,4 +1,4 @@
-using FluentMigratorDapper.Infrastructure.Persistence;
+using FluentMigratorDapper.Infrastructure.Persistence.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

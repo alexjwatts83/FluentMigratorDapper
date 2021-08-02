@@ -1,9 +1,10 @@
 ﻿using FluentMigratorDapper.Infrastructure.Persistence;
+using FluentMigratorDapper.Infrastructure.Persistence.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace FluentMigratorDapper.WebApi
+namespace FluentMigratorDapper.WebApi.DependencyInjection
 {
     internal static class RunDbMigrations
     {

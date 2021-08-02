@@ -5,7 +5,7 @@ using FluentMigratorDapper.Infrastructure.Persistence.RepositoryScripts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace FluentMigratorDapper.Infrastructure.Persistence
+namespace FluentMigratorDapper.Infrastructure.Persistence.DependencyInjection
 {
     public static class PersistenceDependencyInjection
     {
