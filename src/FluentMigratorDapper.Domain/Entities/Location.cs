@@ -1,9 +1,5 @@
 ﻿namespace FluentMigratorDapper.Domain.Entities
 {
-    public class BaseEntity<TKey>
-    {
-        public TKey  Id{ get; set; }
-    }
     public class Location : BaseEntity<string>
     {       
         public string Name { get; set; }
