@@ -1,4 +1,5 @@
 using FluentMigratorDapper.Infrastructure.Persistence.DependencyInjection;
+using FluentMigratorDapper.WebApi.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +23,8 @@ namespace FluentMigratorDapper.WebApi
             services.AddControllers();
 
             services.AddPersistenceServices(Configuration);
+
+            services.AddSwaggerDocumentation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -31,6 +34,8 @@ namespace FluentMigratorDapper.WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwaggerDocumentation();
 
             app.UseHttpsRedirection();
 
