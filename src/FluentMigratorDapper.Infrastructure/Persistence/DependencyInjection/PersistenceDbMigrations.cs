@@ -64,9 +64,10 @@ namespace FluentMigratorDapper.Infrastructure.Persistence.DependencyInjection
             // Instantiate the runner
             var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
 
-            if (runner.HasMigrationsToApplyDown(1))
+            var version = 20210805225000;
+            if (runner.HasMigrationsToApplyDown(version))
             {
-                runner.MigrateDown(1);
+                runner.MigrateDown(version);
             }
 
             if (runner.HasMigrationsToApplyUp())
